@@ -45,23 +45,22 @@ public class VacancyController {
 	}
 	
 	@PostMapping(path="/vacancy/{userId}", consumes = "application/json")
-	public String createVacancy(@RequestBody Vacancy vacancy,@PathVariable("userId") int id, Model model) throws MethodArgumentNotValidException {
+	public Vacancy createVacancy(@RequestBody Vacancy vacancy,@PathVariable("userId") int id, Model model) throws MethodArgumentNotValidException {
 		System.out.println("Inside createVacancy() of VacancyController");
 //		service.save(vacancy);
-		service.createVacancy(vacancy,id);
-		return "added";
+		return service.createVacancy(vacancy,id);
+//		return "added";
 	}
 	
 	@PutMapping(path="/vacancy/{id}", consumes = "application/json")
-	public String updateVacancy(@PathVariable int id, @RequestBody Vacancy updatedVacancy, Model model) throws MethodArgumentNotValidException {
+	public Vacancy updateVacancy(@PathVariable int id, @RequestBody Vacancy updatedVacancy, Model model) throws MethodArgumentNotValidException {
 	    System.out.println("Inside updateVacancy() of VacancyController");
 	    try {
-	    	service.updateById(updatedVacancy, id);
+	    	return service.updateById(updatedVacancy, id);
 	    }
 	    catch(UserNotFoundException e) {
-//	    	throw new UserNotFoundException("id = "+id+" not found");
+	    	throw new RuntimeException("id = "+id+" not found");
 	    } 
-	    return "updated";
 	}
 
 	
