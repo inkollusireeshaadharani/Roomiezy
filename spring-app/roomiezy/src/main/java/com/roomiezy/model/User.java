@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(nullable = false)
 	private String name;
@@ -34,13 +36,9 @@ public class User {
 	@Column
 	private boolean status;
 	
-	 @OneToMany(mappedBy = "user",targetEntity = Vacancy.class, cascade = CascadeType.ALL)
-     private List<Vacancy> vacancies;
-
-	
-//	@OneToMany(targetEntity = Vacancy.class, cascade=CascadeType.ALL)
-//	@JoinColumn(name="vacancyId")
-//	private List<Vacancy> vacancies;
+	@OneToMany(mappedBy = "user",targetEntity = Vacancy.class, cascade = CascadeType.ALL)
+	@JsonIgnore
+    private List<Vacancy> vacancies;
 	
 	public List<Vacancy> getVacancies() {
 		return vacancies;
@@ -48,10 +46,6 @@ public class User {
 	public void setVacancies(List<Vacancy> vacancies) {
 		this.vacancies = vacancies;
 	}
-	@OneToMany(targetEntity = Inquiry.class, cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
-	private List<Inquiry> inquiries;
-	
 	
 	//Getters and setters
 	public int getId() {
@@ -128,5 +122,6 @@ public class User {
 				+ mobile + ", age=" + age + ", occupation=" + occupation + ", city=" + city + ", status=" + status
 				+ "]";
 	}
+	
 	
 }
