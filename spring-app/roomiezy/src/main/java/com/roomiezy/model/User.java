@@ -34,10 +34,20 @@ public class User {
 	@Column
 	private boolean status;
 	
-	@OneToMany(targetEntity = Vacancy.class, cascade=CascadeType.ALL)
-	@JoinColumn(name="id")
-	private List<Vacancy> vacancies;
+	 @OneToMany(mappedBy = "user",targetEntity = Vacancy.class, cascade = CascadeType.ALL)
+     private List<Vacancy> vacancies;
+
 	
+//	@OneToMany(targetEntity = Vacancy.class, cascade=CascadeType.ALL)
+//	@JoinColumn(name="vacancyId")
+//	private List<Vacancy> vacancies;
+	
+	public List<Vacancy> getVacancies() {
+		return vacancies;
+	}
+	public void setVacancies(List<Vacancy> vacancies) {
+		this.vacancies = vacancies;
+	}
 	@OneToMany(targetEntity = Inquiry.class, cascade=CascadeType.ALL)
 	@JoinColumn(name="id")
 	private List<Inquiry> inquiries;
