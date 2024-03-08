@@ -73,20 +73,16 @@ public class VacancyService implements VacancyIService {
 	}
 	
 	 public Vacancy createVacancy(Vacancy vacancy, int userId) {
-         // Fetch the user from the database using userId
-         // Set the user in the vacancy and save
-         // ...
 		 Optional<User> user=userdao.findById(userId);
 		 if(user.isPresent()) {
-			 System.out.println(user.get());
 			 vacancy.setUser(user.get());
-			 vacancy.getUser().setId(userId);
+			 user.get().getVacancies().add(vacancy);
 		 }
 		 else {
-			 System.out.println("QWERTYUIOJFDSADCFVBNMQWERTYUIOSDFGH");
+			 System.out.println("User not found");
 		 }
-
-         return dao.save(vacancy);
+		 Vacancy savedVacancy = dao.save(vacancy);
+	     return savedVacancy;
      }
 	 
 	 public List<Vacancy> getAllVacancies(int id) {

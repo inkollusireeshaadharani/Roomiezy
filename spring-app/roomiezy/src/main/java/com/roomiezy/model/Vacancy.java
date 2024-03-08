@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Vacancy {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int vacancyId;
 	@Column
 	private String city;
@@ -24,16 +24,9 @@ public class Vacancy {
 	@Column
 	private String description;
 	
-	
-	 @ManyToOne
-     @JoinColumn(name = "user_id")
-     private User user;
-	
-//	@ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
-	
-	
+	@ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 	
 	public int getVacancyId() {
 		return vacancyId;
@@ -88,6 +81,11 @@ public class Vacancy {
 	}
 	public Vacancy() {
 		
+	}
+	@Override
+	public String toString() {
+		return "Vacancy [vacancyId=" + vacancyId + ", city=" + city + ", requirement=" + requirement + ", image="
+				+ image + ", address=" + address + ", description=" + description + ", user=" + user + "]";
 	}
 	
 	
