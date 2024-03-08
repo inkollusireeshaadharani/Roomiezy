@@ -43,22 +43,21 @@ public class UserController {
 	}
 	
 	@PostMapping(path="/users", consumes = "application/json")
-	public String createUser(@RequestBody User user, Model model) throws MethodArgumentNotValidException {
+	public User createUser(@RequestBody User user, Model model) throws MethodArgumentNotValidException {
 		System.out.println("Inside createUser() of UserController");
-		service.save(user);
-		return "added";
+		
+		return service.save(user);
 	}
 	
 	@PutMapping(path="/users/{id}", consumes = "application/json")
-	public String updateUser(@PathVariable int id, @RequestBody User updatedUser, Model model) throws MethodArgumentNotValidException {
+	public User updateUser(@PathVariable int id, @RequestBody User updatedUser, Model model) throws MethodArgumentNotValidException {
 	    System.out.println("Inside updateUser() of UserController");
 	    try {
-	    	service.updateById(updatedUser, id);
+	    	return service.updateById(updatedUser, id);
 	    }
 	    catch(UserNotFoundException e) {
 	    	throw new UserNotFoundException("id = "+id+" not found");
-	    } 
-	    return "updated";
+	    }
 	}
 
 	

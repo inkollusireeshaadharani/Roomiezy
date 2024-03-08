@@ -15,7 +15,7 @@ public class Vacancy {
 	private int vacancyId;
 	@Column
 	private String city;
-	@Column(unique = true)
+	@Column
 	private String requirement;
     @Column
     private String image;

@@ -55,7 +55,7 @@ public class VacancyService implements VacancyIService {
 			existingVacancy.setRequirement(updatedVacancy.getRequirement());
 		}
 		else {
-			throw new UserNotFoundException("id = "+id+" not found");
+			throw new RuntimeException("id = "+id+" not found");
 		}
 		return dao.save(existingVacancy);
 	}
@@ -68,7 +68,7 @@ public class VacancyService implements VacancyIService {
 			return dao.deleteById(id);
 		}
 		else {
-			throw new UserNotFoundException("id = "+id+" not found");
+			throw new RuntimeException("id = "+id+" not found");
 		}
 	}
 	
