@@ -11,4 +11,5 @@ public interface VacancyIDao {
 	public Optional<Vacancy> findById(int id);
 	public Vacancy deleteById(int id);
 	public List<Vacancy> findByUserId(int id);
+	public Optional<Vacancy> findByCity(String cityname);
 }

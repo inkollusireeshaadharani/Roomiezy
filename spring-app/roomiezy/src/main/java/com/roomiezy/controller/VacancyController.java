@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.roomiezy.model.Vacancy;
 import com.roomiezy.service.VacancyIService;
 
 @RestController
+@CrossOrigin("*")
 public class VacancyController {
 	@Autowired
 	private VacancyIService service;
@@ -70,4 +72,19 @@ public class VacancyController {
 		service.deleteById(id);
 		return "deleted";
 	}
+	
+	@GetMapping(path="/vacancy/city/{city}")
+	public Vacancy retrieveVacancyByCity(@PathVariable("city") String city){
+		System.out.println("Inside retrieveVacancy() of VacancyController "+city);
+		Optional<Vacancy> opt = service.findByCity(city);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+		else {
+			System.out.println("Throwing Exception");
+			return null;
+//			throw new UserNotFoundException("id = "+id+" not found");
+		}		
+	}
+	
 }
