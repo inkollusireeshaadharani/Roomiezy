@@ -13,4 +13,5 @@ public interface VacancyIService {
 	public Vacancy deleteById(int id);
 	public Vacancy createVacancy(Vacancy vacancy,int userId);
 	public List<Vacancy> getAllVacancies(int id);
+	public Optional<Vacancy> findByCity(String cityname);
 }

@@ -89,7 +89,11 @@ public class VacancyService implements VacancyIService {
          return dao.findByUserId(id);
      }
 
-	
+	 @Override
+		public Optional<Vacancy> findByCity(String cityname) {
+			System.out.println("Inside vacancy");
+			return dao.findByCity(cityname);
+		}
 
 
 	
